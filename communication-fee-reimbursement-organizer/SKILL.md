@@ -9,11 +9,12 @@ description: Organize Chinese corporate phone or communication fee reimbursement
 
 Use this skill to prepare 力量煤业-style communication fee reimbursement materials from policy, roster, address books, invoices, and a reimbursement template. The output should be a filled reimbursement file that preserves the template plus a short exception list for anything that needs human confirmation.
 
-Load `references/workflow.md` before doing the work. Load `references/policy-cheatsheet.md` when the user's sources are for 内蒙古准格尔旗力量煤业有限公司 or when the user provides the same buyer information. Load `references/address-books-2026-04.md` when the user asks to核对手机号/人员 or does not provide a newer company/mine address book.
+Load `references/workflow.md` before doing the work. Load `references/policy-cheatsheet.md` when the user's sources are for 内蒙古准格尔旗力量煤业有限公司 or when the user provides the same buyer information. Load `references/address-books-2026-04.md` when the user asks to核对手机号/人员 or does not provide a newer company/mine address book. Load `references/bundled-workbooks.md` when the task needs HR roster data, phone/fuel reimbursement eligibility records, or bundled workbook paths.
 
 ## Operating Rules
 
 - Treat the provided reimbursement template as authoritative for layout. If the user does not provide a newer template, use the bundled `assets/templates/通讯费第1季度.docx`. Copy the template first, then fill cells; do not redesign tables, widths, fonts, merged cells, signature rows, or totals layout.
+- Treat user-provided current HR rosters and reimbursement eligibility ledgers as authoritative. If the user does not provide newer files, use the bundled workbooks under `assets/data/` and consult `references/bundled-workbooks.md` for their sheet structure.
 - Treat the newest user-provided policy source as authoritative. Use the cheat sheet only as a starting point and replace it when a newer制度汇编 or福利明细 says otherwise.
 - Fill phone numbers from the newest available address books, not from invoices, when the address book and invoice disagree. If no newer address book is provided, use the bundled 2026年4月 company/mine address book reference. Record every discrepancy in the exception list.
 - Never silently invent a missing person, phone number, month, grade, invoice amount, or buyer field. Leave it blank or mark it as pending confirmation in the exception list.
