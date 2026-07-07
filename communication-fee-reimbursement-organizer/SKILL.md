@@ -1,6 +1,6 @@
 ---
 name: communication-fee-reimbursement-organizer
-description: Organize Chinese corporate phone or communication fee reimbursement packages for 力量煤业. Use when Codex needs to create a 通讯费/电话费报销明细表 from a policy, HR roster, invoice amounts, phone invoices, address book PDFs, and a Word/Excel reimbursement template while preserving template formatting, splitting amounts by person and month, matching phone numbers to personnel, and checking invoice buyer information.
+description: Organize Chinese corporate phone or communication fee reimbursement packages for 力量煤业. Use when Codex needs to create a 通讯费/电话费报销明细表 from a policy, HR roster, invoice amounts, phone invoices, address book PDFs, and a Word/Excel reimbursement template while preserving template formatting, splitting amounts by person and month, recalculating 发票金额 and 实报金额 with over-cap amounts excluded from reimbursement, matching phone numbers to personnel, and checking invoice buyer information.
 ---
 
 # Communication Fee Reimbursement Organizer
@@ -18,6 +18,8 @@ Load `references/workflow.md` before doing the work. Load `references/policy-che
 - Treat the newest user-provided policy source as authoritative. Use the cheat sheet only as a starting point and replace it when a newer制度汇编 or福利明细 says otherwise.
 - Fill phone numbers from the newest available address books, not from invoices, when the address book and invoice disagree. If no newer address book is provided, use the bundled 2026年4月 company/mine address book reference. Record every discrepancy in the exception list.
 - Never silently invent a missing person, phone number, month, grade, invoice amount, or buyer field. Leave it blank or mark it as pending confirmation in the exception list.
+- Treat `发票金额` as the original invoice or billing amount for that person-month, and independently calculate `实报金额` from the monthly reimbursement standard. Do not copy invoice amount into reimbursed amount when the invoice amount exceeds the standard.
+- Exclude over-cap amounts from reimbursement: for each person and month, `实报金额 = min(发票金额, 报销标准)`, and `超额不予报销金额 = max(发票金额 - 报销标准, 0)`. Record over-cap cases in the exception/check report or a calculation audit table.
 - Use exact money math with two decimal places for final display. Preserve formulas in the template when possible; if formulas must be replaced, explain why.
 - Keep audit evidence: source filename, page/sheet if available, row or invoice number, normalized phone number, and the decision made.
 
@@ -31,7 +33,7 @@ Load `references/workflow.md` before doing the work. Load `references/policy-che
 6. Extract each invoice or invoice amount record. Capture invoice number, date, service period, phone/account number, amount, buyer name, tax number, address/phone, bank, and bank account.
 7. Validate invoice buyer information against the expected company information. Normalize spaces in tax numbers and bank accounts before comparing.
 8. Match invoices to people by phone number first, then by person name only when the phone number is missing or unclear. Cross-check every match against HR roster and both address books.
-9. Split amounts by person and month according to the invoice period and the template period. Apply the policy cap per person per month: reimbursed amount is the lesser of invoice amount and monthly standard unless the policy says otherwise.
+9. Split amounts by person and month according to the invoice period and the template period. Recalculate both `发票金额` and `实报金额` at the person-month level. Apply the policy cap per person per month: reimbursed amount is the lesser of invoice amount and monthly standard unless the policy says otherwise, and the excess is not reimbursed.
 10. Fill the copied template using the existing row pattern. If more people are needed than the template has, copy existing data rows and preserve styles, borders, formulas, row heights, and merged-cell behavior.
 11. Create an exception list for phone mismatches, missing contacts, duplicate names, HR/address-book disagreements, invoice buyer mismatches, amount-over-cap cases, and missing invoice fields.
 12. Render or otherwise visually inspect the final file. Check that totals, page layout, signatures, and table alignment still match the original template.
