@@ -1,0 +1,4 @@
+interface:
+  display_name: "通讯费报销整理"
+  short_description: "按模板整理通讯费报销并核对发票信息"
+  default_prompt: "Use $communication-fee-reimbursement-organizer to prepare a phone-fee reimbursement file from the policy, roster, address books, invoices, and template."
