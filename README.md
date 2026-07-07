@@ -35,6 +35,15 @@ skill 已内置用户确认上传的 2026 年 4 月通讯录引用文件：`refe
 
 skill 已内置用户确认上传的 Word 模板：`assets/templates/通讯费第1季度.docx`。没有另传新版模板时，使用这个模板的副本进行填报，不能直接修改模板原件。
 
+## 内置工作簿
+
+skill 已内置用户确认上传的 Excel 数据资产，说明见：`references/bundled-workbooks.md`。
+
+- `assets/data/2026年：电话费、燃油费报销人员统计.xlsx`
+- `assets/data/1.人力资源报表- 20260611-力量煤业_副本.xlsx`
+
+如果后续提供新版 HR 名单或电话费/燃油费台账，应优先使用新版，并把内置工作簿作为历史对照。
+
 ## 本地安装
 
 把 skill 文件夹复制到 Codex skills 目录：
