@@ -1,4 +1,4 @@
 interface:
   display_name: "通讯费报销整理"
-  short_description: "严格按模板格式整理通讯费报销并核算实报金额"
-  default_prompt: "Use $communication-fee-reimbursement-organizer to prepare a phone-fee reimbursement file from the policy, roster, address books, invoices, and template. Preserve the template's fonts, formatting, layout, merged cells, row heights, column widths, signature blocks, and formulas exactly while recalculating reimbursed amounts so over-cap invoice amounts are excluded."
+  short_description: "按模板整理通讯费报销并按部门合并发票 PDF"
+  default_prompt: "Use $communication-fee-reimbursement-organizer to prepare a phone-fee reimbursement file from the policy, roster, address books, invoices, and template. Preserve the template formatting exactly, recalculate reimbursed amounts so over-cap invoice amounts are excluded, and when invoice files are available, merge each department's invoices into PDFs ordered by the reimbursement detail table."

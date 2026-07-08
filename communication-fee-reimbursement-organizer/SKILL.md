@@ -1,6 +1,6 @@
 ---
 name: communication-fee-reimbursement-organizer
-description: Organize Chinese corporate phone or communication fee reimbursement packages for 力量煤业. Use when Codex needs to create a 通讯费/电话费报销明细表 from a policy, HR roster, invoice amounts, phone invoices, address book PDFs, and a Word/Excel reimbursement template while strictly preserving the template's fonts, formatting, table structure, merged cells, widths, row heights, signature blocks, and formulas; filling 人员级别 from the `岗位` column in the phone/fuel reimbursement personnel ledger instead of approval wording; splitting amounts by person and month; recalculating 发票金额 and 实报金额 with over-cap amounts excluded from reimbursement; matching phone numbers to personnel; and checking invoice buyer information.
+description: Organize Chinese corporate phone or communication fee reimbursement packages for 力量煤业. Use when Codex needs to create a 通讯费/电话费报销明细表 from a policy, HR roster, invoice amounts, phone invoices, address book PDFs, and a Word/Excel reimbursement template while strictly preserving the template's fonts, formatting, table structure, merged cells, widths, row heights, signature blocks, and formulas; filling 人员级别 from the `岗位` column in the phone/fuel reimbursement personnel ledger instead of approval wording; splitting amounts by person and month; recalculating 发票金额 and 实报金额 with over-cap amounts excluded from reimbursement; matching phone numbers to personnel; arranging invoice PDFs by department in the reimbursement-detail order; and checking invoice buyer information.
 ---
 
 # Communication Fee Reimbursement Organizer
@@ -22,6 +22,7 @@ Load `references/workflow.md` before doing the work. Load `references/policy-che
 - Never silently invent a missing person, phone number, month, grade, invoice amount, or buyer field. Leave it blank or mark it as pending confirmation in the exception list.
 - Treat `发票金额` as the original invoice or billing amount for that person-month, and independently calculate `实报金额` from the monthly reimbursement standard. Do not copy invoice amount into reimbursed amount when the invoice amount exceeds the standard.
 - Exclude over-cap amounts from reimbursement: for each person and month, `实报金额 = min(发票金额, 报销标准)`, and `超额不予报销金额 = max(发票金额 - 报销标准, 0)`. Record over-cap cases in the exception/check report or a calculation audit table.
+- After the reimbursement detail table is filled, use it as the ordering authority for invoice assembly. Group invoice files by department and merge each department's invoices in the same person/month order shown in the reimbursement detail table. Do not sort invoices by filename, file creation time, or invoice number when that conflicts with the detail-table order.
 - Use exact money math with two decimal places for final display. Preserve formulas in the template when possible; if formulas must be replaced, explain why.
 - Keep audit evidence: source filename, page/sheet if available, row or invoice number, normalized phone number, and the decision made.
 
@@ -37,14 +38,16 @@ Load `references/workflow.md` before doing the work. Load `references/policy-che
 8. Match invoices to people by phone number first, then by person name only when the phone number is missing or unclear. Cross-check every match against HR roster and both address books.
 9. Split amounts by person and month according to the invoice period and the template period. Recalculate both `发票金额` and `实报金额` at the person-month level. Apply the policy cap per person per month: reimbursed amount is the lesser of invoice amount and monthly standard unless the policy says otherwise, and the excess is not reimbursed.
 10. Fill the copied template using the existing row pattern and template formatting exactly. If more people are needed than the template has, copy existing data rows and preserve styles, fonts, borders, formulas, row heights, column widths, and merged-cell behavior.
-11. Create an exception list for phone mismatches, missing contacts, duplicate names, HR/address-book disagreements, invoice buyer mismatches, amount-over-cap cases, and missing invoice fields.
-12. Render or otherwise visually inspect the final file. Check that totals, page layout, signatures, and table alignment still match the original template.
+11. If invoice PDF/image files are provided, assemble department-level invoice PDFs after the reimbursement detail table is complete. Build the merge order from the filled detail table, group by department, and preserve each original invoice page without resizing or editing its content unless conversion is required for image invoices.
+12. Create an exception list for phone mismatches, missing contacts, duplicate names, HR/address-book disagreements, invoice buyer mismatches, amount-over-cap cases, missing invoice fields, and any invoice file that cannot be matched or ordered.
+13. Render or otherwise visually inspect the final reimbursement file and merged invoice PDFs. Check that totals, page layout, signatures, table alignment, invoice page count, and department invoice order are correct.
 
 ## Outputs
 
 Produce these artifacts when enough source data is available:
 
 - Filled reimbursement file in the same family as the template (`.docx` or `.xlsx`), with the original formatting preserved. When using the bundled template, output a copied and filled `.docx`, never modify the bundled asset in place.
+- Department-level merged invoice PDFs when invoice files are available. Name them clearly by department, and order invoices exactly as the department's people/months appear in the reimbursement detail table.
 - Exception/check report (`.md`, `.xlsx`, or appended table as appropriate) listing every item requiring explanation or manual confirmation.
 - Short final summary with output paths, total invoice amount, total reimbursed amount, and the count of exceptions.
 
